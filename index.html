@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Titelo Maleka — Computer Science Student &amp; Developer</title>
+<meta name="description" content="I'm Titelo Maleka, a final-year Computer Science student at Tshwane University of Technology. Open to WIL & internship opportunities in 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #050b13;
+    --bg-alt: #071118;
+    --surface: #0d131a;
+    --surface-hi: #111923;
+    --border: #16303c;
+    --text: #eef4f8;
+    --text-dim: #9ab3c1;
+    --text-faint: #5c7182;
+    --accent: #0d8013;
+    --accent-dim: #0d8013;
+    --accent-soft: rgba(48,199,138,0.14);
+    --merge: #0d8013;
+    --merge-soft: rgba(48,199,138,0.14);
+    --max-w: 1120px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(61,220,151,0.06), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(61,220,151,0.05), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+  img{ max-width:100%; display:block; }
+
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  .display{ font-family:'Space Grotesk', sans-serif; }
+
+  .wrap{
+    max-width:var(--max-w);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  ::selection{ background:var(--accent); color:#0a0e12; }
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(10,14,18,0.78);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  nav.wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:58px;
+  }
+  .logo{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:0.5px;
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .logo::before{
+    content:'';
+    width:8px; height:8px;
+    background:var(--accent);
+    border-radius:1px;
+    display:inline-block;
+  }
+  .logo .cursor{
+    display:inline-block;
+    width:8px; height:16px;
+    background:var(--accent);
+    animation:blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .nav-links{
+    display:flex;
+    gap:32px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:18px;
+    color:var(--text-faint);
+  }
+  .nav-links a{ padding:4px 0; transition:color .2s; font-weight:700; color:var(--text-faint); }
+  .nav-links a:hover{ color:var(--text); }
+
+  .nav-cta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    font-weight:700;
+    padding:8px 18px;
+    border:1px solid transparent;
+    color:#ffffff;
+    background:#0d8013;
+    border-radius:999px;
+    transition:all .2s;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{ background:#0d8013; border-color:transparent; color:#ffffff; }
+
+  .nav-toggle{ display:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:60px 24px 24px;
+    position:relative;
+  }
+  .hero .wrap{ padding:0; }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr minmax(0,380px);
+    gap:48px;
+    align-items:start;
+  }
+  .hero-left{
+    min-width:0;
+  }
+  .hero-right{
+    min-height: auto;
+    margin-top:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  
+  /* Desktop: Rectangular with enhanced always-visible glow */
+  .hero-image-wrapper{
+    width:100%;
+    max-width:380px;
+    aspect-ratio: 3/4;
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid rgba(48,199,138,0.2);
+    box-shadow: 
+      0 8px 32px rgba(48,199,138,0.15),
+      0 0 60px rgba(48,199,138,0.10),
+      0 0 100px rgba(48,199,138,0.06),
+      inset 0 0 60px rgba(48,199,138,0.05);
+    transition:all 0.4s ease;
+    position:relative;
+  }
+  .hero-image-wrapper::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:12px;
+    box-shadow: inset 0 0 40px rgba(48,199,138,0.10);
+    pointer-events:none;
+  }
+  .hero-image-wrapper:hover{
+    border-color:rgba(48,199,138,0.4);
+    box-shadow: 
+      0 12px 48px rgba(48,199,138,0.25),
+      0 0 80px rgba(48,199,138,0.18),
+      0 0 120px rgba(48,199,138,0.10),
+      inset 0 0 60px rgba(48,199,138,0.08);
+    transform:translateY(-4px) scale(1.01);
+  }
+  .hero-image{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--merge);
+    background:var(--merge-soft);
+    border:1px solid rgba(61,220,151,0.25);
+    padding:6px 12px;
+    border-radius:20px;
+    margin-bottom:28px;
+  }
+  .badge .dot{
+    width:6px; height:6px;
+    background:var(--merge);
+    border-radius:50%;
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:1; transform:scale(1); }
+    50%{ opacity:0.4; transform:scale(0.8); }
+  }
+
+  h1.headline{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(2.4rem, 6vw, 4.2rem);
+    font-weight:700;
+    line-height:1.08;
+    letter-spacing:-0.02em;
+  }
+  h1.headline .line{ display:block; }
+  h1.headline .line:nth-child(2),
+  h1.headline .line:nth-child(3),
+  h1.headline .line:nth-child(4){ color:var(--accent); }
+
+  .hero-desc{
+    margin-top:28px;
+    max-width:620px;
+    color:var(--text-dim);
+    font-size:16px;
+    line-height:1.75;
+  }
+
+  .hero-actions{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+    margin-top:16px;
+  }
+  .hero-buttons{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    padding:13px 22px;
+    border-radius:999px;
+    transition:all .2s;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .btn-primary{
+    background:var(--accent);
+    color:#0a0e12;
+    font-weight:600;
+  }
+  .btn-primary:hover{ background:var(--accent-dim); transform:translateY(-1px); }
+  .btn-ghost{
+    border:1px solid var(--border);
+    color:var(--text);
+  }
+  .btn-ghost:hover{ border-color:var(--text-faint); background:var(--surface); }
+
+  .hero-social{
+    display:flex;
+    gap:22px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--text-faint);
+  }
+  .hero-social a{ display:flex; align-items:center; gap:7px; transition:color .2s; }
+  .hero-social a:hover{ color:var(--accent); }
+  .hero-social svg{ width:16px; height:16px; }
+
+  .stats{
+    margin-top:0;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:0;
+  }
+  .stat{
+    padding:24px 20px;
+  }
+  .stat .num{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(2.4rem, 6vw, 4.2rem);
+    font-weight:800;
+    color:var(--accent);
+  }
+  .stat .label{
+    margin-top:4px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--accent);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{ padding:96px 24px; border-top:1px solid var(--border); }
+  #about{
+    border-top:none;
+    padding-top:8px;
+    margin-top:0px;
+  }
+
+  /* tighten spacing for work section and remove divider */
+  #work{
+    border-top:none;
+    padding-top:16px;
+    margin-top:0px;
+  }
+  #hackathons{
+    border-top:none;
+    padding-top:16px;
+    margin-top:0px;
+  }
+  #skills,
+  #certs,
+  #contact{
+    border-top:none;
+    padding-top:16px;
+    margin-top:0px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:18px;
+    color:var(--accent);
+    margin-bottom:14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{ content:'//'; color:var(--text-faint); }
+  .section-heading{
+    font-weight:800;
+  }
+  .about-grid{
+    margin-top:44px;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:32px;
+  }
+
+  h2.section-heading{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(2.2rem, 4vw, 3.2rem);
+    font-weight:600;
+    line-height:1.25;
+    max-width:640px;
+    letter-spacing:-0.01em;
+  }
+  .section-heading .accent-text{
+    color:var(--accent);
+  }
+  .project-desc ul{
+    list-style:disc;
+    margin-left:20px;
+    color:var(--text-dim);
+  }
+  .project-desc ul li{ margin-bottom:8px; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    margin-top:32px;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+  .about-grid p{ color:var(--text-dim); font-size:15.5px; line-height:1.8; }
+  .about-grid p + p{ margin-top:20px; }
+
+  /* ---------- PROJECTS ---------- */
+  .projects-grid{
+    margin-top:48px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .project-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:32px;
+    transition:border-color .25s, transform .25s;
+    display:flex;
+    flex-direction:column;
+  }
+  .project-card:hover{ border-color:var(--accent-dim); transform:translateY(-3px); }
+  .project-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+  }
+  .project-name{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.4rem;
+    font-weight:600;
+  }
+  .project-tagline{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--accent);
+    margin-top:6px;
+  }
+  .project-desc{
+    margin-top:18px;
+    color:var(--text-dim);
+    font-size:14.5px;
+    line-height:1.75;
+    flex-grow:1;
+  }
+  .project-desc ul li {
+    margin-bottom: 8px;
+    word-break: break-word;
+  }
+  .project-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:22px;
+  }
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--text-dim);
+    border:1px solid var(--border);
+    padding:4px 10px;
+    border-radius:20px;
+  }
+  .project-cta{
+    margin-top:24px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--text);
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    width:fit-content;
+    border-bottom:1px solid var(--text-faint);
+    padding-bottom:2px;
+    transition:color .2s, border-color .2s;
+  }
+  .project-card:hover .project-cta{ color:var(--accent); border-color:var(--accent); }
+
+  /* ---------- HACKATHONS (git log) ---------- */
+  .gitlog{
+    margin-top:48px;
+    border-left:2px solid var(--border);
+    margin-left:6px;
+  }
+  .commit{
+    position:relative;
+    padding:0 0 34px 32px;
+  }
+  .commit:last-child{ padding-bottom:0; }
+  .commit::before{
+    content:'';
+    position:absolute;
+    left:-7px;
+    top:4px;
+    width:12px; height:12px;
+    border-radius:50%;
+    background:var(--bg);
+    border:2px solid var(--text-faint);
+  }
+  .commit.win::before{
+    border-color:var(--merge);
+    background:var(--merge);
+    box-shadow:0 0 0 3px var(--merge-soft);
+  }
+  .commit-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .commit-hash{
+    display:none;
+  }
+  .commit-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.1rem;
+    font-weight:600;
+  }
+  .commit-badge{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    padding:2px 9px;
+    border-radius:20px;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+  }
+  .commit-badge.win{ background:var(--merge-soft); color:var(--merge); border:1px solid rgba(61,220,151,0.3); }
+  .commit-badge.finalist{ background:var(--accent-soft); color:var(--accent); border:1px solid rgba(61,220,151,0.3); }
+  .commit-badge.part{ background:var(--surface-hi); color:var(--text-dim); border:1px solid var(--border); }
+
+  .commit-meta{
+    margin-top:6px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--text-faint);
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .commit-note{
+    margin-top:10px;
+    font-size:14px;
+    color:var(--text-dim);
+    max-width:600px;
+    line-height:1.7;
+    border-left:2px solid var(--accent-dim);
+    padding-left:14px;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{
+    margin-top:48px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+  }
+  .skill-folder{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:26px;
+  }
+  .skill-folder h3{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:16px;
+  }
+  .skill-list{ display:flex; flex-wrap:wrap; gap:8px; }
+  .skill-chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--text);
+    background:var(--surface-hi);
+    border:1px solid var(--border);
+    padding:6px 12px;
+    border-radius:5px;
+  }
+
+  /* ---------- CERTIFICATIONS ---------- */
+  .certs-list{ 
+    margin-top:44px; 
+    border-top:1px solid var(--border);
+    overflow-x: auto;
+  }
+  
+  .certs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  
+  .certs-table th {
+    text-align: left;
+    padding: 16px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-faint);
+    border-bottom: 2px solid var(--border);
+    font-weight: 600;
+  }
+  
+  .certs-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-dim);
+    vertical-align: middle;
+  }
+  
+  .certs-table tr:hover td {
+    background: var(--surface);
+  }
+  
+  .cert-name-cell {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+  
+  .cert-issuer-cell {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+  
+  .cert-view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    padding: 6px 14px;
+    border: 1px solid rgba(48,199,138,0.2);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    background: rgba(48,199,138,0.05);
+    cursor: pointer;
+  }
+  
+  .cert-view-btn:hover {
+    background: rgba(48,199,138,0.12);
+    border-color: rgba(48,199,138,0.4);
+    transform: translateY(-1px);
+  }
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 11, 19, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .modal-overlay.active {
+    display: flex;
+  }
+  
+  .modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 120px rgba(48,199,138,0.06);
+    border: 1px solid rgba(48,199,138,0.15);
+    animation: scaleIn 0.3s ease;
+  }
+  
+  .modal-content img {
+    width: 100%;
+    height: auto;
+    max-height: 85vh;
+    object-fit: contain;
+    display: block;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(5, 11, 19, 0.8);
+    border: 1px solid rgba(48,199,138,0.2);
+    color: var(--text);
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  
+  .modal-close:hover {
+    background: rgba(48,199,138,0.15);
+    border-color: rgba(48,199,138,0.4);
+    transform: rotate(90deg);
+    color: var(--accent);
+  }
+  
+  .modal-close svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes scaleIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-panel{
+    margin-top:28px;
+    display:grid;
+    grid-template-columns:1fr minmax(260px,360px);
+    gap:20px;
+    background:transparent;
+    border:0;
+    border-radius:0;
+    padding:12px 0 0 0;
+  }
+  .contact-cards{
+    display:block;
+    width:100%;
+  }
+  .contact-card,
+  .contact-social-box{
+    background:rgba(8,14,18,0.16);
+    border:1px solid rgba(48,199,138,0.10);
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 8px 20px rgba(48,199,138,0.04);
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    gap:10px;
+    min-height:140px;
+  }
+  .contact-main{
+    padding:16px;
+  }
+  .contact-row{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:12px 0;
+  }
+  .contact-link{ color:inherit; text-decoration:none; }
+  .contact-link:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; border-radius:8px; }
+  .contact-link p{ margin:0; color:var(--text); }
+  .contact-link:hover p{ color:var(--accent); }
+  .contact-icon{
+    width:48px;
+    height:48px;
+    min-width:48px;
+    border-radius:12px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(48,199,138,0.06);
+    border:1px solid rgba(48,199,138,0.12);
+    color:var(--accent);
+  }
+  .contact-link{ cursor:pointer; }
+  .contact-link .contact-icon{ cursor:inherit; transition:all .18s ease; }
+  .contact-link:hover .contact-icon,
+  .contact-link:focus-visible .contact-icon{
+    background:rgba(48,199,138,0.12);
+    border-color:rgba(48,199,138,0.28);
+    color:var(--accent);
+    transform:translateY(-3px);
+  }
+  .contact-icon svg{ width:20px; height:20px; }
+  .contact-main p{ margin:0; font-size:16px; color:var(--text); }
+  .contact-card strong{
+    display:block;
+    margin-bottom:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--accent);
+  }
+  .contact-card p,
+  .contact-social-box a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:16px;
+    color:var(--text);
+    line-height:1.7;
+    word-break:break-word;
+  }
+  .contact-socials{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+    align-self:start;
+  }
+  .contact-social-box{ padding:16px; min-height:68px; }
+  .contact-card{ padding:15px; }
+  .contact-social-box span{
+    display:block;
+    margin-top:-31px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--text-dim);
+  }
+  .contact-social-box{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:18px;
+    border-radius:14px;
+    text-decoration:none;
+    transition:all .18s ease;
+    border:1px solid rgba(48,199,138,0.08);
+    background:rgba(8,14,18,0.2);
+  }
+  .contact-social-box:hover{
+    transform:translateY(-4px);
+    box-shadow:0 24px 40px rgba(48,199,138,0.06);
+    border-color:rgba(48,199,138,0.22);
+  }
+  .contact-social-content strong{ font-family:'Space Grotesk', sans-serif; font-weight:600; display:block; }
+  .contact-social-content span{ color:var(--text-dim); display:block; margin-top:6px; }
+  .contact-arrow{ margin-left:auto; color:var(--text-dim); }
+  .contact-social-box .contact-icon{ background:transparent; border:0; box-shadow:none; }
+  .contact-social-box svg{ width:22px; height:22px; color:var(--accent); }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:32px 24px;
+    border-top:1px solid var(--border);
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--text-faint);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .hero-right {
+      min-height: auto;
+      margin-top: 0;
+      order: -1;
+    }
+    /* Tablet: Circular with enhanced always-visible glow */
+    .hero-image-wrapper {
+      max-width: 300px;
+      margin: 0 auto;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      border: 2px solid rgba(48,199,138,0.25);
+      box-shadow: 
+        0 8px 32px rgba(48,199,138,0.20),
+        0 0 60px rgba(48,199,138,0.15),
+        0 0 100px rgba(48,199,138,0.08),
+        inset 0 0 60px rgba(48,199,138,0.06);
+    }
+    .hero-image-wrapper::after {
+      border-radius: 50%;
+      box-shadow: inset 0 0 40px rgba(48,199,138,0.12);
+    }
+    .hero-image-wrapper:hover {
+      border-color: rgba(48,199,138,0.4);
+      box-shadow: 
+        0 12px 48px rgba(48,199,138,0.30),
+        0 0 80px rgba(48,199,138,0.22),
+        0 0 120px rgba(48,199,138,0.12),
+        inset 0 0 60px rgba(48,199,138,0.10);
+      transform: scale(1.02);
+    }
+    .hero-left {
+      text-align: center;
+    }
+    .hero-desc {
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-actions {
+      justify-content: center;
+    }
+    .stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .stat {
+      padding: 16px;
+      text-align: center;
+    }
+    .badge {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1.headline {
+      text-align: center;
+    }
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    .skills-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .contact-panel {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+    .nav-cta {
+      font-size: 12px;
+      padding: 6px 14px;
+    }
+    .hero {
+      padding: 40px 16px 24px;
+    }
+    .hero-right {
+      min-height: auto;
+    }
+    .hero-image-wrapper {
+      max-width: 240px;
+    }
+    section {
+      padding: 48px 16px;
+    }
+    h1.headline {
+      font-size: clamp(2rem, 8vw, 3rem);
+    }
+    .hero-desc {
+      font-size: 15px;
+      padding: 0 8px;
+    }
+    .hero-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-social {
+      justify-content: center;
+    }
+    .hero-buttons {
+      justify-content: center;
+      width: 100%;
+    }
+    .btn {
+      width: 100%;
+      justify-content: center;
+      padding: 12px 20px;
+    }
+    .stats {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .stat .num {
+      font-size: clamp(2rem, 8vw, 3rem);
+    }
+    .stat .label {
+      font-size: 10px;
+    }
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    .project-card {
+      padding: 24px;
+    }
+    .project-name {
+      font-size: 1.2rem;
+    }
+    .contact-panel {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .contact-card {
+      padding: 12px;
+    }
+    .contact-row {
+      padding: 8px 0;
+      gap: 12px;
+    }
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+    }
+    .contact-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+    .contact-main p {
+      font-size: 14px;
+    }
+    .contact-social-box {
+      padding: 14px;
+      gap: 12px;
+    }
+    .contact-social-content strong {
+      font-size: 14px;
+    }
+    .contact-social-content span {
+      font-size: 12px;
+    }
+    .commit-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .commit-title {
+      font-size: 1rem;
+    }
+    .commit-meta {
+      font-size: 11px;
+      gap: 8px;
+    }
+    .commit-note {
+      font-size: 13px;
+      padding-left: 10px;
+    }
+    
+    /* Certifications responsive */
+    .certs-table {
+      font-size: 12px;
+    }
+    .certs-table th,
+    .certs-table td {
+      padding: 10px 8px;
+    }
+    .cert-name-cell {
+      font-size: 0.85rem;
+    }
+    .cert-issuer-cell {
+      font-size: 10px;
+    }
+    .cert-view-btn {
+      font-size: 10px;
+      padding: 4px 10px;
+    }
+    
+    .modal-content {
+      max-width: 95%;
+    }
+    .modal-close {
+      width: 36px;
+      height: 36px;
+      top: 10px;
+      right: 10px;
+      font-size: 18px;
+    }
+    .modal-close svg {
+      width: 16px;
+      height: 16px;
+    }
+    
+    h2.section-heading {
+      font-size: clamp(1.8rem, 6vw, 2.4rem);
+    }
+    .gitlog {
+      margin-left: 0;
+      border-left: 2px solid var(--border);
+    }
+    .commit {
+      padding: 0 0 24px 24px;
+    }
+    .commit::before {
+      left: -7px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: 32px 12px 20px;
+    }
+    .hero-right {
+      min-height: auto;
+    }
+    .hero-image-wrapper {
+      max-width: 200px;
+    }
+    .hero-social {
+      gap: 16px;
+      font-size: 12px;
+    }
+    .hero-social svg {
+      width: 14px;
+      height: 14px;
+    }
+    .stats {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .stat {
+      padding: 12px 8px;
+    }
+    .stat .num {
+      font-size: 1.8rem;
+    }
+    .stat .label {
+      font-size: 9px;
+    }
+    .btn {
+      font-size: 12px;
+      padding: 10px 16px;
+    }
+    .project-card {
+      padding: 20px;
+    }
+    .project-desc {
+      font-size: 13px;
+    }
+    .project-desc ul {
+      margin-left: 16px;
+    }
+    .project-desc ul li {
+      font-size: 13px;
+    }
+    .project-tags {
+      gap: 6px;
+    }
+    .tag {
+      font-size: 10px;
+      padding: 3px 8px;
+    }
+    .contact-card {
+      padding: 12px 8px;
+    }
+    .contact-row {
+      padding: 6px 0;
+      gap: 10px;
+    }
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+    }
+    .contact-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+    .contact-main p {
+      font-size: 13px;
+    }
+    .contact-social-box {
+      padding: 12px;
+      gap: 10px;
+    }
+    .contact-social-box svg {
+      width: 18px;
+      height: 18px;
+    }
+    .contact-social-content strong {
+      font-size: 13px;
+    }
+    .contact-social-content span {
+      font-size: 11px;
+    }
+    .commit {
+      padding: 0 0 20px 20px;
+    }
+    .commit-title {
+      font-size: 0.95rem;
+    }
+    .commit-badge {
+      font-size: 9px;
+      padding: 2px 7px;
+    }
+    .commit-note {
+      font-size: 12px;
+    }
+    
+    /* Certifications mobile */
+    .certs-table {
+      font-size: 10px;
+    }
+    .certs-table th,
+    .certs-table td {
+      padding: 8px 6px;
+    }
+    .cert-name-cell {
+      font-size: 0.75rem;
+    }
+    .cert-issuer-cell {
+      font-size: 9px;
+    }
+    .cert-view-btn {
+      font-size: 9px;
+      padding: 3px 8px;
+    }
+    
+    .modal-content {
+      max-width: 98%;
+    }
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      top: 8px;
+      right: 8px;
+      font-size: 16px;
+    }
+    .modal-close svg {
+      width: 14px;
+      height: 14px;
+    }
+    
+    .skill-folder {
+      padding: 20px;
+    }
+    .skill-chip {
+      font-size: 11px;
+      padding: 4px 10px;
+    }
+    h2.section-heading {
+      font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+    .logo {
+      font-size: 13px;
+    }
+    .nav-cta {
+      font-size: 11px;
+      padding: 5px 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo">titelo<span class="cursor"></span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#hackathons">Hackathons</a></li>
+      <li><a href="#certs">Certs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Let's talk</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" style="border-top:none;">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="badge"><span class="dot"></span>Open to Work</div>
+          <h1 class="headline">
+            <span class="line">Hackathon Winner.</span>
+            <span class="line">Problem Solver.</span>
+            <span class="line">Future Software</span>
+            <span class="line">Engineer.</span>
+          </h1>
+          <p class="hero-desc">
+            I'm Titelo Maleka, a Computer Science graduate passionate about building technology that solves real world problems. Through hackathon-winning projects, hands-on software development and continuous learning, I've developed practical skills in software development, cybersecurity, mobile applications and enterprise systems. I'm driven by curiosity, collaboration and the opportunity to create solutions that make a meaningful impact.
+          </p>
+          <div class="hero-actions">
+            <div class="hero-social">
+              <a href="https://github.com/titelo-m" target="_blank" rel="noopener" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.25.8-.57v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+              </a>
+              <a href="https://linkedin.com/in/titelo-maleka" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM.5 8.98h4.96V23H.5V8.98Zm7.5 0h4.75v1.92h.07c.66-1.25 2.28-2.57 4.7-2.57 5.02 0 5.95 3.3 5.95 7.6V23h-4.96v-6.24c0-1.49-.03-3.4-2.07-3.4-2.08 0-2.4 1.62-2.4 3.3V23H8V8.98Z"/></svg>
+              </a>
+              <a href="mailto:persevarancetetelo@gmail.com" aria-label="Email">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm10 8.6L3.5 6H20.5L12 12.6ZM2 7.4V18h20V7.4l-10 7.7L2 7.4Z"/></svg>
+              </a>
+            </div>
+            <div class="hero-buttons">
+              <a href="#work" class="btn btn-primary">See my work</a>
+              <a href="assets/Maleka_Titelo_CV.pdf" class="btn btn-ghost" download>Download CV</a>
+            </div>
+          </div>
+
+      <div class="stats">
+        <div class="stat"><div class="num">9</div><div class="label">Hackathons attended</div></div>
+        <div class="stat"><div class="num">3</div><div class="label">1st place wins</div></div>
+        <div class="stat"><div class="num">10+</div><div class="label">Certifications</div></div>
+        <div class="stat"><div class="num">50+</div><div class="label">Students tutored</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-image-wrapper">
+        <img src="assets/profile.jpg" alt="Titelo Maleka" class="hero-image">
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <h2 class="section-heading">Curious mind, a builder, mentor and competitor.</h2>
+      <div class="about-grid">
+        <p>I'm passionate about using technology to solve real-world problems and enjoy building practical solutions across different areas of IT. Whether it's software development, cybersecurity, mobile applications, cloud technologies, or enterprise systems, I'm always eager to learn, adapt, and contribute to meaningful projects.</p>
+        <p>I believe the best technology solves real problems and creates lasting value. I'm committed to continuous learning, adapting to new challenges, and collaborating with others to build reliable, innovative, and impactful solutions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="work">
+    <div class="wrap">
+    <h2 class="section-heading">Projects I'm <span class="accent-text">proud of.</span></h2>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-top">
+            <div>
+              <div class="project-name"><strong>MzansiShield</strong></div>
+              <div class="project-tagline">Cybersecurity Web App</div>
+            </div>
+          </div>
+          <div class="project-desc">
+            <ul>
+              <li>Developed a web application that analyses URLs to identify suspicious links and potential phishing attacks before users access them.</li>
+              <li>Implemented phishing detection logic to identify fake domains, typosquatting, IP-based URLs, and other common scam patterns.</li>
+              <li>Supports all 11 South African languages to improve accessibility and digital safety.</li>
+              <li>Responsive and user-friendly interface, enabling users to perform real-time URL safety checks directly in their browser.</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Tailwind CSS</span>
+          </div>
+          <a href="https://msanzi-shield-url-checker.vercel.app/" class="project-cta">Live view →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-top">
+            <div>
+              <div class="project-name">EduConnect</div>
+              <div class="project-tagline">Online Learning Platform</div>
+            </div>
+          </div>
+          <div class="project-desc">
+            <ul>
+              <li>Developed a three-tier web application that enables learners to access educational resources and tutors to manage and share learning content.</li>
+              <li>Built features for tutors to upload notes, videos, past papers, and schedule online classes with meeting links.</li>
+              <li>Secure user authentication and role-based access control for learners and tutors using Java and Jakarta EE.</li>
+              <li>Designed and integrated an Oracle database to manage users, educational content, file storage, and online class schedules.</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="tag">Java</span>
+            <span class="tag">Jakarta EE</span>
+            <span class="tag">JSP</span>
+            <span class="tag">Oracle Database</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+          <a href="https://github.com/titelo-m/EduConnect" class="project-cta">Live view →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-top">
+            <div>
+              <div class="project-name">Drip4Masemola</div>
+              <div class="project-tagline">Mobile Car Wash Booking App</div>
+            </div>
+          </div>
+          <div class="project-desc">
+            <ul>
+              <li>Engineered a mobile booking application that digitizes community car wash services, allowing customers to schedule appointments and manage their vehicles with ease.</li>
+              <li>Transformed a traditional walk-in car wash process into a digital booking experience through a React Native mobile application.</li>
+              <li>Inspired by a real business need in rural Limpopo, demonstrating how technology can solve local challenges and support small businesses.</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="tag">React Native</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Expo</span>
+          </div>
+          <a href="https://github.com/titelo-m/Drip4Masemola" class="project-cta">Live view →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-top">
+            <div>
+              <div class="project-name">Nails by Lufuno</div>
+              <div class="project-tagline">Business Website • Frontend Development</div>
+            </div>
+          </div>
+          <div class="project-desc">
+            <ul>
+              <li>Developed a fully responsive website optimized for desktop, tablet, and mobile devices.</li>
+              <li>Created an interactive gallery to showcase nail designs and services with a clean, modern user interface.</li>
+              <li>Designed and built a modern, polished website for a nail technician that showcases services and portfolio work.</li>
+              <li>Added a WhatsApp booking flow so clients can quickly inquire and book appointments directly.</li>
+            </ul>
+          </div>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Vite</span>
+            <span class="tag">Tailwind</span>
+            <span class="tag">Framer Motion</span>
+          </div>
+          <a href="https://nails-by-lufuno.vercel.app/" class="project-cta">Live view →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HACKATHONS -->
+  <section id="hackathons">
+    <div class="wrap">
+      <h2 class="section-heading">9 hackathons. <span class="accent-text">3 first places.</span></h2>
+
+      <div class="gitlog">
+
+        <div class="commit win">
+          <div class="commit-head">
+            <span class="commit-hash">#01</span>
+            <span class="commit-title">Telkom 10X Hackathon</span>
+            <span class="commit-badge win">1st Place</span>
+          </div>
+          <div class="commit-meta"><span>Emalahleni Edition</span><span>05 Sep 2025</span></div>
+        </div>
+
+        <div class="commit win">
+          <div class="commit-head">
+            <span class="commit-hash">#02</span>
+            <span class="commit-title">CyberSecureTech Hackathon</span>
+            <span class="commit-badge win">1st Place</span>
+          </div>
+          <div class="commit-meta"><span>UNIVEN &amp; CSIR</span><span>08 Dec 2025</span></div>
+        </div>
+
+        <div class="commit win">
+          <div class="commit-head">
+            <span class="commit-hash">#03</span>
+            <span class="commit-title">TrailBlazer Digital Hub AI Agent Hackathon</span>
+            <span class="commit-badge win">1st Place</span>
+          </div>
+          <div class="commit-meta"><span>Nkangala TVET College</span><span>13 Mar 2026</span></div>
+          <div class="commit-note">Selected by TrailBlazer to present an innovation project during South Africa Innovation Week at NASREC Expo Centre, Johannesburg.</div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-head">
+            <span class="commit-hash">#04</span>
+            <span class="commit-title">GKHack25</span>
+            <span class="commit-badge finalist">Top Provincial Finalist</span>
+          </div>
+          <div class="commit-meta"><span>Telkom</span><span>28 Sep 2025</span></div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-head">
+            <span class="commit-hash">#05</span>
+            <span class="commit-title">Microsoft AI Skills Hackathon</span>
+            <span class="commit-badge part">Participant</span>
+          </div>
+          <div class="commit-meta"><span>Microsoft &amp; Geekulcha</span><span>06 May 2025</span></div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-head">
+            <span class="commit-hash">#06</span>
+            <span class="commit-title">MAISH Hackathon</span>
+            <span class="commit-badge part">Participant</span>
+          </div>
+          <div class="commit-meta"><span>TUT &amp; University of Mpumalanga</span><span>23 Oct 2025</span></div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-head">
+            <span class="commit-hash">#07</span>
+            <span class="commit-title">W3Node/Engine Hackathon - Cape Town</span>
+            <span class="commit-badge part">Participant</span>
+          </div>
+          <div class="commit-meta"><span>Cape Town</span><span>22 Jan 2026</span></div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-head">
+            <span class="commit-hash">#08</span>
+            <span class="commit-title">SMU Health Hackathon 2026</span>
+            <span class="commit-badge part">Participant</span>
+          </div>
+          <div class="commit-meta"><span>Hosted by Geekulcha &amp; City of Tshwane</span><span>19–21 Jun 2026</span></div>
+        </div>
+
+        <div class="commit">
+          <div class="commit-head">
+            <span class="commit-hash">#09</span>
+            <span class="commit-title">Security Summit 2026</span>
+            <span class="commit-badge part">Participant</span>
+          </div>
+          <div class="commit-meta"><span>Hosted by Geekulcha</span><span>23 Jun 2026</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <h2 class="section-heading">The stack I <span class="accent-text">build with.</span></h2>
+
+      <div class="skills-grid">
+        <div class="skill-folder">
+          <h3>Languages</h3>
+          <div class="skill-list">
+            <span class="skill-chip">Java</span>
+            <span class="skill-chip">SQL</span>
+            <span class="skill-chip">TypeScript</span>
+            <span class="skill-chip">JavaScript</span>
+            <span class="skill-chip">HTML/CSS</span>
+            <span class="skill-chip">Kotlin</span>
+          </div>
+        </div>
+        <div class="skill-folder">
+          <h3>Frameworks</h3>
+          <div class="skill-list">
+            <span class="skill-chip">React</span>
+            <span class="skill-chip">React Native</span>
+            <span class="skill-chip">Tailwind CSS</span>
+            <span class="skill-chip">Node.js</span>
+            <span class="skill-chip">Vite</span>
+          </div>
+        </div>
+        <div class="skill-folder">
+          <h3>Tools</h3>
+          <div class="skill-list">
+            <span class="skill-chip">Git / GitHub</span>
+            <span class="skill-chip">Oracle SQL</span>
+            <span class="skill-chip">Supabase</span>
+            <span class="skill-chip">VS Code</span>
+            <span class="skill-chip">NetBeans</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certs">
+    <div class="wrap">
+      <h2 class="section-heading">Always <span class="accent-text">learning.</span></h2>
+
+      <div class="certs-list">
+        <table class="certs-table">
+          <thead>
+            <tr>
+              <th>Certificate</th>
+              <th>Issuer</th>
+              <th>View</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="cert-name-cell">Cloud Foundations</td>
+              <td class="cert-issuer-cell">Amazon Web Services (AWS)</td>
+              <td>
+                <button class="cert-view-btn" onclick="openModal('assets/CloudFoundations.jpg')">View</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="cert-name-cell">Full Stack Development</td>
+              <td class="cert-issuer-cell">FNB App Academy</td>
+              <td>
+                <button class="cert-view-btn" onclick="openModal('assets/FNB.jpg')">View</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="cert-name-cell">Ethical Hacker</td>
+              <td class="cert-issuer-cell">Cisco</td>
+              <td>
+                <button class="cert-view-btn" onclick="openModal('assets/EthicalHacker.jpg')">View</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="cert-name-cell">Data Science 101</td>
+              <td class="cert-issuer-cell">IBM</td>
+              <td>
+                <button class="cert-view-btn" onclick="openModal('assets/DataScience101.jpg')">View</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="cert-name-cell">Responsive Web Design</td>
+              <td class="cert-issuer-cell">freeCodeCamp</td>
+              <td>
+                <button class="cert-view-btn" onclick="openModal('assets/ResponsiveWebDesign.jpg')">View</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="cert-name-cell">Introduction to Cybersecurity</td>
+              <td class="cert-issuer-cell">Cisco</td>
+              <td>
+                <button class="cert-view-btn" onclick="openModal('assets/IntroductionToCybersecurity.jpg')">View</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="cert-name-cell">Microsoft AI Fluency</td>
+              <td class="cert-issuer-cell">Microsoft &amp; Geekulcha</td>
+              <td>
+                <button class="cert-view-btn" onclick="openModal('assets/MicrosoftAIFluency.jpg')">View</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="cert-name-cell">Microsoft AI Skills Hackathon</td>
+              <td class="cert-issuer-cell">Microsoft &amp; Geekulcha</td>
+              <td>
+                <button class="cert-view-btn" onclick="openModal('assets/MicrosoftAISkillsHackathon.jpg')">View</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="cert-name-cell">GKHack25 — Top Provincial Finalist</td>
+              <td class="cert-issuer-cell">Telkom</td>
+              <td>
+                <button class="cert-view-btn" onclick="openModal('assets/GKHack25.jpg')">View</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="cert-name-cell">CyberSecureTech Hackathon</td>
+              <td class="cert-issuer-cell">UNIVEN &amp; CSIR</td>
+              <td>
+                <button class="cert-view-btn" onclick="openModal('assets/CyberSecureTech.jpg')">View</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="certModal" onclick="closeModal(event)">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <img id="modalImage" src="" alt="Certificate">
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <h2 class="section-heading">Let's <span class="accent-text">build something.</span></h2>
+
+      <div class="contact-panel">
+        <div class="contact-cards">
+          <div class="contact-card contact-main">
+            <a class="contact-row contact-link" href="mailto:persevarancetetelo@gmail.com" aria-label="Email persevarancetetelo at gmail">
+              <span class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5v7A2.5 2.5 0 0 0 5.5 18h13A2.5 2.5 0 0 0 21 15.5v-7"/><path d="M21 7l-9 6-9-6"/></svg>
+              </span>
+              <p>persevarancetetelo@gmail.com</p>
+            </a>
+            <a class="contact-row contact-link" href="tel:+27766778427" aria-label="Call +27 76 677 8427">
+              <span class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19.86 19.86 0 0 1 3 5.11 1 1 0 0 1 4 4h4.09a1 1 0 0 1 1 .75 12.57 12.57 0 0 0 .7 2.57 1 1 0 0 1-.24 1l-1.27 1.27a16 16 0 0 0 6.36 6.36l1.27-1.27a1 1 0 0 1 1-.24 12.57 12.57 0 0 0 2.57.7 1 1 0 0 1 .75 1V22z"/></svg>
+              </span>
+              <p>+27 76 677 8427</p>
+            </a>
+            <div class="contact-row">
+              <span class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 11-9 11S3 16 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="2"/></svg>
+              </span>
+              <p>Johannesburg, South Africa</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-socials">
+          <a class="contact-social-box" href="https://linkedin.com/in/titelo-maleka" target="_blank" rel="noopener">
+            <span class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-2-2 2 2 0 0 0-2 2v6h-4v-12h4v2.3"/><rect x="2" y="3" width="20" height="20" rx="2" ry="2"/></svg>
+            </span>
+            <div class="contact-social-content">
+              <strong>LinkedIn</strong>
+              <span>/in/titelo-maleka</span>
+            </div>
+            <span class="contact-arrow">↗</span>
+          </a>
+
+          <a class="contact-social-box" href="https://github.com/titelo-m" target="_blank" rel="noopener">
+            <span class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.25.8-.57v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            </span>
+            <div class="contact-social-content">
+              <strong>GitHub</strong>
+              <span>@titelo-m</span>
+            </div>
+            <span class="contact-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2026 Titelo Maleka</footer>
+
+<script>
+  // Open modal with certificate image
+  function openModal(imageSrc) {
+    const modal = document.getElementById('certModal');
+    const modalImage = document.getElementById('modalImage');
+    modalImage.src = imageSrc;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+  }
+
+  // Close modal
+  function closeModal(event) {
+    if (event && event.target !== event.currentTarget) return;
+    const modal = document.getElementById('certModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+  }
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  });
+</script>
+
+</body>
+</html>
