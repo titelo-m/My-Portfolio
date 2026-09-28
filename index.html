@@ -9,7 +9,6 @@
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-<link rel="manifest" href="assets/site.webmanifest">
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +29,25 @@
     --merge: #0d8013;
     --merge-soft: rgba(48,199,138,0.14);
     --max-w: 1120px;
+    --header-bg: rgba(10,14,18,0.78);
+  }
+
+  /* ---------- LIGHT MODE ---------- */
+  [data-theme="light"]{
+    --bg: #f5f7f5;
+    --bg-alt: #eef2ee;
+    --surface: #ffffff;
+    --surface-hi: #f0f4f0;
+    --border: #d5ddd5;
+    --text: #000000;
+    --text-dim: #1a2b1d;
+    --text-faint: #3d4a3f;
+    --accent: #0a6910;
+    --accent-dim: #085010;
+    --accent-soft: rgba(13,128,19,0.10);
+    --merge: #0a6910;
+    --merge-soft: rgba(13,128,19,0.10);
+    --header-bg: rgba(245,247,245,0.85);
   }
 
   *{ box-sizing:border-box; margin:0; padding:0; }
@@ -45,6 +63,14 @@
     font-family:'Inter', sans-serif;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    transition: background-color .3s ease, color .3s ease;
+  }
+
+  [data-theme="light"] body{
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -5%, rgba(13,128,19,0.05), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(13,128,19,0.04), transparent 60%),
+      var(--bg);
   }
 
   a{ color:inherit; text-decoration:none; }
@@ -60,7 +86,7 @@
     padding:0 24px;
   }
 
-  ::selection{ background:var(--accent); color:#0a0e12; }
+  ::selection{ background:var(--accent); color:#ffffff; }
 
   :focus-visible{
     outline:2px solid var(--accent);
@@ -73,16 +99,18 @@
     position:sticky;
     top:0;
     z-index:100;
-    background:rgba(10,14,18,0.78);
+    background:var(--header-bg);
     backdrop-filter:blur(10px);
     -webkit-backdrop-filter:blur(10px);
     border-bottom:1px solid var(--border);
+    transition:background-color .3s ease, border-color .3s ease;
   }
   nav.wrap{
     display:flex;
     align-items:center;
     justify-content:space-between;
     height:58px;
+    gap:16px;
   }
   .logo{
     font-family:'IBM Plex Mono', monospace;
@@ -119,6 +147,12 @@
   .nav-links a{ padding:4px 0; transition:color .2s; font-weight:700; color:var(--text-faint); }
   .nav-links a:hover{ color:var(--text); }
 
+  .nav-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+
   .nav-cta{
     font-family:'IBM Plex Mono', monospace;
     font-size:13px;
@@ -131,9 +165,35 @@
     transition:all .2s;
     white-space:nowrap;
   }
-  .nav-cta:hover{ background:#0d8013; border-color:transparent; color:#ffffff; }
+  .nav-cta:hover{ background:#0a6910; border-color:transparent; color:#ffffff; }
 
-  .nav-toggle{ display:none; }
+  /* ---------- THEME TOGGLE ---------- */
+  .theme-toggle{
+    background:transparent;
+    border:1px solid var(--border);
+    color:var(--text-dim);
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    transition:all .25s ease;
+    flex-shrink:0;
+  }
+  .theme-toggle:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+    transform:rotate(15deg);
+  }
+  .theme-toggle svg{ width:18px; height:18px; }
+
+  .theme-toggle .icon-sun{ display:block; }
+  .theme-toggle .icon-moon{ display:none; }
+  [data-theme="light"] .theme-toggle .icon-sun{ display:none; }
+  [data-theme="light"] .theme-toggle .icon-moon{ display:block; }
 
   /* ---------- HERO ---------- */
   .hero{
@@ -157,8 +217,7 @@
     justify-content:center;
     align-items:center;
   }
-  
-  /* Desktop: Rectangular with enhanced always-visible glow */
+
   .hero-image-wrapper{
     width:100%;
     max-width:380px;
@@ -166,7 +225,7 @@
     border-radius:12px;
     overflow:hidden;
     border:1px solid rgba(48,199,138,0.2);
-    box-shadow: 
+    box-shadow:
       0 8px 32px rgba(48,199,138,0.15),
       0 0 60px rgba(48,199,138,0.10),
       0 0 100px rgba(48,199,138,0.06),
@@ -184,7 +243,7 @@
   }
   .hero-image-wrapper:hover{
     border-color:rgba(48,199,138,0.4);
-    box-shadow: 
+    box-shadow:
       0 12px 48px rgba(48,199,138,0.25),
       0 0 80px rgba(48,199,138,0.18),
       0 0 120px rgba(48,199,138,0.10),
@@ -267,7 +326,7 @@
   }
   .btn-primary{
     background:var(--accent);
-    color:#0a0e12;
+    color:#ffffff;
     font-weight:600;
   }
   .btn-primary:hover{ background:var(--accent-dim); transform:translateY(-1px); }
@@ -289,7 +348,7 @@
   .hero-social svg{ width:16px; height:16px; }
 
   .stats{
-    margin-top:0;
+    margin-top:40px;
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:0;
@@ -314,30 +373,11 @@
 
   /* ---------- SECTION SHARED ---------- */
   section{ padding:96px 24px; border-top:1px solid var(--border); }
-  #about{
-    border-top:none;
-    padding-top:8px;
-    margin-top:0px;
-  }
+  #about{ border-top:none; padding-top:8px; margin-top:0px; }
+  #work{ border-top:none; padding-top:16px; margin-top:0px; }
+  #hackathons{ border-top:none; padding-top:16px; margin-top:0px; }
+  #skills, #certs, #contact{ border-top:none; padding-top:16px; margin-top:0px; }
 
-  /* tighten spacing for work section and remove divider */
-  #work{
-    border-top:none;
-    padding-top:16px;
-    margin-top:0px;
-  }
-  #hackathons{
-    border-top:none;
-    padding-top:16px;
-    margin-top:0px;
-  }
-  #skills,
-  #certs,
-  #contact{
-    border-top:none;
-    padding-top:16px;
-    margin-top:0px;
-  }
   .eyebrow{
     font-family:'IBM Plex Mono', monospace;
     font-size:18px;
@@ -348,15 +388,7 @@
     gap:10px;
   }
   .eyebrow::before{ content:'//'; color:var(--text-faint); }
-  .section-heading{
-    font-weight:800;
-  }
-  .about-grid{
-    margin-top:44px;
-    display:grid;
-    grid-template-columns:1fr;
-    gap:32px;
-  }
+  .section-heading{ font-weight:800; }
 
   h2.section-heading{
     font-family:'Space Grotesk', sans-serif;
@@ -366,9 +398,8 @@
     max-width:640px;
     letter-spacing:-0.01em;
   }
-  .section-heading .accent-text{
-    color:var(--accent);
-  }
+  .section-heading .accent-text{ color:var(--accent); }
+
   .project-desc ul{
     list-style:disc;
     margin-left:20px;
@@ -398,7 +429,7 @@
     border:1px solid var(--border);
     border-radius:10px;
     padding:32px;
-    transition:border-color .25s, transform .25s;
+    transition:border-color .25s, transform .25s, background-color .3s ease;
     display:flex;
     flex-direction:column;
   }
@@ -492,9 +523,7 @@
     gap:12px;
     flex-wrap:wrap;
   }
-  .commit-hash{
-    display:none;
-  }
+  .commit-hash{ display:none; }
   .commit-title{
     font-family:'Space Grotesk', sans-serif;
     font-size:1.1rem;
@@ -543,6 +572,7 @@
     border:1px solid var(--border);
     border-radius:10px;
     padding:26px;
+    transition:background-color .3s ease, border-color .3s ease;
   }
   .skill-folder h3{
     font-family:'IBM Plex Mono', monospace;
@@ -561,21 +591,22 @@
     border:1px solid var(--border);
     padding:6px 12px;
     border-radius:5px;
+    transition:background-color .3s ease, border-color .3s ease, color .3s ease;
   }
 
   /* ---------- CERTIFICATIONS ---------- */
-  .certs-list{ 
-    margin-top:44px; 
+  .certs-list{
+    margin-top:44px;
     border-top:1px solid var(--border);
     overflow-x: auto;
   }
-  
+
   .certs-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 14px;
   }
-  
+
   .certs-table th {
     text-align: left;
     padding: 16px 12px;
@@ -587,31 +618,31 @@
     border-bottom: 2px solid var(--border);
     font-weight: 600;
   }
-  
+
   .certs-table td {
     padding: 14px 12px;
     border-bottom: 1px solid var(--border);
     color: var(--text-dim);
     vertical-align: middle;
   }
-  
+
   .certs-table tr:hover td {
     background: var(--surface);
   }
-  
+
   .cert-name-cell {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--text);
   }
-  
+
   .cert-issuer-cell {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
     color: var(--text-faint);
   }
-  
+
   .cert-view-btn {
     display: inline-flex;
     align-items: center;
@@ -627,7 +658,7 @@
     background: rgba(48,199,138,0.05);
     cursor: pointer;
   }
-  
+
   .cert-view-btn:hover {
     background: rgba(48,199,138,0.12);
     border-color: rgba(48,199,138,0.4);
@@ -651,11 +682,11 @@
     padding: 20px;
     animation: fadeIn 0.3s ease;
   }
-  
+
   .modal-overlay.active {
     display: flex;
   }
-  
+
   .modal-content {
     max-width: 90%;
     max-height: 90%;
@@ -666,7 +697,7 @@
     border: 1px solid rgba(48,199,138,0.15);
     animation: scaleIn 0.3s ease;
   }
-  
+
   .modal-content img {
     width: 100%;
     height: auto;
@@ -674,7 +705,7 @@
     object-fit: contain;
     display: block;
   }
-  
+
   .modal-close {
     position: absolute;
     top: 16px;
@@ -694,24 +725,24 @@
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
   }
-  
+
   .modal-close:hover {
     background: rgba(48,199,138,0.15);
     border-color: rgba(48,199,138,0.4);
     transform: rotate(90deg);
     color: var(--accent);
   }
-  
+
   .modal-close svg {
     width: 20px;
     height: 20px;
   }
-  
+
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
   }
-  
+
   @keyframes scaleIn {
     from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
@@ -734,8 +765,8 @@
   }
   .contact-card,
   .contact-social-box{
-    background:rgba(8,14,18,0.16);
-    border:1px solid rgba(48,199,138,0.10);
+    background:var(--surface);
+    border:1px solid var(--border);
     border-radius:12px;
     padding:18px;
     box-shadow:0 8px 20px rgba(48,199,138,0.04);
@@ -744,6 +775,7 @@
     justify-content:flex-start;
     gap:10px;
     min-height:140px;
+    transition:background-color .3s ease, border-color .3s ease;
   }
   .contact-main{
     padding:16px;
@@ -754,7 +786,7 @@
     gap:18px;
     padding:12px 0;
   }
-  .contact-link{ color:inherit; text-decoration:none; }
+  .contact-link{ color:inherit; text-decoration:none; cursor:pointer; }
   .contact-link:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; border-radius:8px; }
   .contact-link p{ margin:0; color:var(--text); }
   .contact-link:hover p{ color:var(--accent); }
@@ -770,7 +802,6 @@
     border:1px solid rgba(48,199,138,0.12);
     color:var(--accent);
   }
-  .contact-link{ cursor:pointer; }
   .contact-link .contact-icon{ cursor:inherit; transition:all .18s ease; }
   .contact-link:hover .contact-icon,
   .contact-link:focus-visible .contact-icon{
@@ -821,8 +852,8 @@
     border-radius:14px;
     text-decoration:none;
     transition:all .18s ease;
-    border:1px solid rgba(48,199,138,0.08);
-    background:rgba(8,14,18,0.2);
+    border:1px solid var(--border);
+    background:var(--surface);
   }
   .contact-social-box:hover{
     transform:translateY(-4px);
@@ -847,23 +878,15 @@
 
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 1024px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-    .hero-right {
-      min-height: auto;
-      margin-top: 0;
-      order: -1;
-    }
-    /* Tablet: Circular with enhanced always-visible glow */
+    .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+    .hero-right { min-height: auto; margin-top: 0; order: -1; }
     .hero-image-wrapper {
       max-width: 300px;
       margin: 0 auto;
       aspect-ratio: 1/1;
       border-radius: 50%;
       border: 2px solid rgba(48,199,138,0.25);
-      box-shadow: 
+      box-shadow:
         0 8px 32px rgba(48,199,138,0.20),
         0 0 60px rgba(48,199,138,0.15),
         0 0 100px rgba(48,199,138,0.08),
@@ -875,367 +898,119 @@
     }
     .hero-image-wrapper:hover {
       border-color: rgba(48,199,138,0.4);
-      box-shadow: 
+      box-shadow:
         0 12px 48px rgba(48,199,138,0.30),
         0 0 80px rgba(48,199,138,0.22),
         0 0 120px rgba(48,199,138,0.12),
         inset 0 0 60px rgba(48,199,138,0.10);
       transform: scale(1.02);
     }
-    .hero-left {
-      text-align: center;
-    }
-    .hero-desc {
-      max-width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .hero-actions {
-      justify-content: center;
-    }
-    .stats {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .stat {
-      padding: 16px;
-      text-align: center;
-    }
-    .badge {
-      margin-left: auto;
-      margin-right: auto;
-    }
-    h1.headline {
-      text-align: center;
-    }
-    .projects-grid {
-      grid-template-columns: 1fr;
-    }
-    .skills-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-    .contact-panel {
-      grid-template-columns: 1fr;
-    }
+    .hero-left { text-align: center; }
+    .hero-desc { max-width: 100%; margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+    .stat { padding: 16px; text-align: center; }
+    .badge { margin-left: auto; margin-right: auto; }
+    h1.headline { text-align: center; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .contact-panel { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 768px) {
-    .nav-links {
-      display: none;
-    }
-    .nav-cta {
-      font-size: 12px;
-      padding: 6px 14px;
-    }
-    .hero {
-      padding: 40px 16px 24px;
-    }
-    .hero-right {
-      min-height: auto;
-    }
-    .hero-image-wrapper {
-      max-width: 240px;
-    }
-    section {
-      padding: 48px 16px;
-    }
-    h1.headline {
-      font-size: clamp(2rem, 8vw, 3rem);
-    }
-    .hero-desc {
-      font-size: 15px;
-      padding: 0 8px;
-    }
-    .hero-actions {
-      flex-direction: column;
-      align-items: center;
-    }
-    .hero-social {
-      justify-content: center;
-    }
-    .hero-buttons {
-      justify-content: center;
-      width: 100%;
-    }
-    .btn {
-      width: 100%;
-      justify-content: center;
-      padding: 12px 20px;
-    }
-    .stats {
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .stat .num {
-      font-size: clamp(2rem, 8vw, 3rem);
-    }
-    .stat .label {
-      font-size: 10px;
-    }
-    .skills-grid {
-      grid-template-columns: 1fr;
-    }
-    .projects-grid {
-      grid-template-columns: 1fr;
-    }
-    .project-card {
-      padding: 24px;
-    }
-    .project-name {
-      font-size: 1.2rem;
-    }
-    .contact-panel {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    .contact-card {
-      padding: 12px;
-    }
-    .contact-row {
-      padding: 8px 0;
-      gap: 12px;
-    }
-    .contact-icon {
-      width: 40px;
-      height: 40px;
-      min-width: 40px;
-    }
-    .contact-icon svg {
-      width: 18px;
-      height: 18px;
-    }
-    .contact-main p {
-      font-size: 14px;
-    }
-    .contact-social-box {
-      padding: 14px;
-      gap: 12px;
-    }
-    .contact-social-content strong {
-      font-size: 14px;
-    }
-    .contact-social-content span {
-      font-size: 12px;
-    }
-    .commit-head {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
-    }
-    .commit-title {
-      font-size: 1rem;
-    }
-    .commit-meta {
-      font-size: 11px;
-      gap: 8px;
-    }
-    .commit-note {
-      font-size: 13px;
-      padding-left: 10px;
-    }
-    
-    /* Certifications responsive */
-    .certs-table {
-      font-size: 12px;
-    }
-    .certs-table th,
-    .certs-table td {
-      padding: 10px 8px;
-    }
-    .cert-name-cell {
-      font-size: 0.85rem;
-    }
-    .cert-issuer-cell {
-      font-size: 10px;
-    }
-    .cert-view-btn {
-      font-size: 10px;
-      padding: 4px 10px;
-    }
-    
-    .modal-content {
-      max-width: 95%;
-    }
-    .modal-close {
-      width: 36px;
-      height: 36px;
-      top: 10px;
-      right: 10px;
-      font-size: 18px;
-    }
-    .modal-close svg {
-      width: 16px;
-      height: 16px;
-    }
-    
-    h2.section-heading {
-      font-size: clamp(1.8rem, 6vw, 2.4rem);
-    }
-    .gitlog {
-      margin-left: 0;
-      border-left: 2px solid var(--border);
-    }
-    .commit {
-      padding: 0 0 24px 24px;
-    }
-    .commit::before {
-      left: -7px;
-    }
+    .nav-links { display: none; }
+    .nav-cta { font-size: 12px; padding: 6px 14px; }
+    .theme-toggle { width: 32px; height: 32px; }
+    .theme-toggle svg { width: 16px; height: 16px; }
+    .hero { padding: 40px 16px 24px; }
+    .hero-right { min-height: auto; }
+    .hero-image-wrapper { max-width: 240px; }
+    section { padding: 48px 16px; }
+    h1.headline { font-size: clamp(2rem, 8vw, 3rem); }
+    .hero-desc { font-size: 15px; padding: 0 8px; }
+    .hero-actions { flex-direction: column; align-items: center; }
+    .hero-social { justify-content: center; }
+    .hero-buttons { justify-content: center; width: 100%; }
+    .btn { width: 100%; justify-content: center; padding: 12px 20px; }
+    .stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .stat .num { font-size: clamp(2rem, 8vw, 3rem); }
+    .stat .label { font-size: 10px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card { padding: 24px; }
+    .project-name { font-size: 1.2rem; }
+    .contact-panel { grid-template-columns: 1fr; gap: 16px; }
+    .contact-card { padding: 12px; }
+    .contact-row { padding: 8px 0; gap: 12px; }
+    .contact-icon { width: 40px; height: 40px; min-width: 40px; }
+    .contact-icon svg { width: 18px; height: 18px; }
+    .contact-main p { font-size: 14px; }
+    .contact-social-box { padding: 14px; gap: 12px; }
+    .contact-social-content strong { font-size: 14px; }
+    .contact-social-content span { font-size: 12px; }
+    .commit-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .commit-title { font-size: 1rem; }
+    .commit-meta { font-size: 11px; gap: 8px; }
+    .commit-note { font-size: 13px; padding-left: 10px; }
+    .certs-table { font-size: 12px; }
+    .certs-table th, .certs-table td { padding: 10px 8px; }
+    .cert-name-cell { font-size: 0.85rem; }
+    .cert-issuer-cell { font-size: 10px; }
+    .cert-view-btn { font-size: 10px; padding: 4px 10px; }
+    .modal-content { max-width: 95%; }
+    .modal-close { width: 36px; height: 36px; top: 10px; right: 10px; font-size: 18px; }
+    .modal-close svg { width: 16px; height: 16px; }
+    h2.section-heading { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+    .gitlog { margin-left: 0; border-left: 2px solid var(--border); }
+    .commit { padding: 0 0 24px 24px; }
+    .commit::before { left: -7px; }
   }
 
   @media (max-width: 480px) {
-    .hero {
-      padding: 32px 12px 20px;
-    }
-    .hero-right {
-      min-height: auto;
-    }
-    .hero-image-wrapper {
-      max-width: 200px;
-    }
-    .hero-social {
-      gap: 16px;
-      font-size: 12px;
-    }
-    .hero-social svg {
-      width: 14px;
-      height: 14px;
-    }
-    .stats {
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-    .stat {
-      padding: 12px 8px;
-    }
-    .stat .num {
-      font-size: 1.8rem;
-    }
-    .stat .label {
-      font-size: 9px;
-    }
-    .btn {
-      font-size: 12px;
-      padding: 10px 16px;
-    }
-    .project-card {
-      padding: 20px;
-    }
-    .project-desc {
-      font-size: 13px;
-    }
-    .project-desc ul {
-      margin-left: 16px;
-    }
-    .project-desc ul li {
-      font-size: 13px;
-    }
-    .project-tags {
-      gap: 6px;
-    }
-    .tag {
-      font-size: 10px;
-      padding: 3px 8px;
-    }
-    .contact-card {
-      padding: 12px 8px;
-    }
-    .contact-row {
-      padding: 6px 0;
-      gap: 10px;
-    }
-    .contact-icon {
-      width: 36px;
-      height: 36px;
-      min-width: 36px;
-    }
-    .contact-icon svg {
-      width: 16px;
-      height: 16px;
-    }
-    .contact-main p {
-      font-size: 13px;
-    }
-    .contact-social-box {
-      padding: 12px;
-      gap: 10px;
-    }
-    .contact-social-box svg {
-      width: 18px;
-      height: 18px;
-    }
-    .contact-social-content strong {
-      font-size: 13px;
-    }
-    .contact-social-content span {
-      font-size: 11px;
-    }
-    .commit {
-      padding: 0 0 20px 20px;
-    }
-    .commit-title {
-      font-size: 0.95rem;
-    }
-    .commit-badge {
-      font-size: 9px;
-      padding: 2px 7px;
-    }
-    .commit-note {
-      font-size: 12px;
-    }
-    
-    /* Certifications mobile */
-    .certs-table {
-      font-size: 10px;
-    }
-    .certs-table th,
-    .certs-table td {
-      padding: 8px 6px;
-    }
-    .cert-name-cell {
-      font-size: 0.75rem;
-    }
-    .cert-issuer-cell {
-      font-size: 9px;
-    }
-    .cert-view-btn {
-      font-size: 9px;
-      padding: 3px 8px;
-    }
-    
-    .modal-content {
-      max-width: 98%;
-    }
-    .modal-close {
-      width: 32px;
-      height: 32px;
-      top: 8px;
-      right: 8px;
-      font-size: 16px;
-    }
-    .modal-close svg {
-      width: 14px;
-      height: 14px;
-    }
-    
-    .skill-folder {
-      padding: 20px;
-    }
-    .skill-chip {
-      font-size: 11px;
-      padding: 4px 10px;
-    }
-    h2.section-heading {
-      font-size: clamp(1.5rem, 5vw, 2rem);
-    }
-    .logo {
-      font-size: 13px;
-    }
-    .nav-cta {
-      font-size: 11px;
-      padding: 5px 12px;
-    }
+    .hero { padding: 32px 12px 20px; }
+    .hero-right { min-height: auto; }
+    .hero-image-wrapper { max-width: 200px; }
+    .hero-social { gap: 16px; font-size: 12px; }
+    .hero-social svg { width: 14px; height: 14px; }
+    .stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .stat { padding: 12px 8px; }
+    .stat .num { font-size: 1.8rem; }
+    .stat .label { font-size: 9px; }
+    .btn { font-size: 12px; padding: 10px 16px; }
+    .project-card { padding: 20px; }
+    .project-desc { font-size: 13px; }
+    .project-desc ul { margin-left: 16px; }
+    .project-desc ul li { font-size: 13px; }
+    .project-tags { gap: 6px; }
+    .tag { font-size: 10px; padding: 3px 8px; }
+    .contact-card { padding: 12px 8px; }
+    .contact-row { padding: 6px 0; gap: 10px; }
+    .contact-icon { width: 36px; height: 36px; min-width: 36px; }
+    .contact-icon svg { width: 16px; height: 16px; }
+    .contact-main p { font-size: 13px; }
+    .contact-social-box { padding: 12px; gap: 10px; }
+    .contact-social-box svg { width: 18px; height: 18px; }
+    .contact-social-content strong { font-size: 13px; }
+    .contact-social-content span { font-size: 11px; }
+    .commit { padding: 0 0 20px 20px; }
+    .commit-title { font-size: 0.95rem; }
+    .commit-badge { font-size: 9px; padding: 2px 7px; }
+    .commit-note { font-size: 12px; }
+    .certs-table { font-size: 10px; }
+    .certs-table th, .certs-table td { padding: 8px 6px; }
+    .cert-name-cell { font-size: 0.75rem; }
+    .cert-issuer-cell { font-size: 9px; }
+    .cert-view-btn { font-size: 9px; padding: 3px 8px; }
+    .modal-content { max-width: 98%; }
+    .modal-close { width: 32px; height: 32px; top: 8px; right: 8px; font-size: 16px; }
+    .modal-close svg { width: 14px; height: 14px; }
+    .skill-folder { padding: 20px; }
+    .skill-chip { font-size: 11px; padding: 4px 10px; }
+    h2.section-heading { font-size: clamp(1.5rem, 5vw, 2rem); }
+    .logo { font-size: 13px; }
+    .nav-cta { font-size: 11px; padding: 5px 12px; }
+    .theme-toggle { width: 30px; height: 30px; }
+    .theme-toggle svg { width: 14px; height: 14px; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -1255,7 +1030,18 @@
       <li><a href="#certs">Certs</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="#contact" class="nav-cta">Let's talk</a>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <a href="#contact" class="nav-cta">Let's talk</a>
+    </div>
   </nav>
 </header>
 
@@ -1265,6 +1051,7 @@
   <section class="hero" style="border-top:none;">
     <div class="wrap">
       <div class="hero-grid">
+
         <div class="hero-left">
           <div class="badge"><span class="dot"></span>Open to Work</div>
           <h1 class="headline">
@@ -1294,20 +1081,23 @@
             </div>
           </div>
 
-      <div class="stats">
-        <div class="stat"><div class="num">9</div><div class="label">Hackathons attended</div></div>
-        <div class="stat"><div class="num">3</div><div class="label">1st place wins</div></div>
-        <div class="stat"><div class="num">10+</div><div class="label">Certifications</div></div>
-        <div class="stat"><div class="num">50+</div><div class="label">Students tutored</div></div>
+          <div class="stats">
+            <div class="stat"><div class="num">9</div><div class="label">Hackathons attended</div></div>
+            <div class="stat"><div class="num">3</div><div class="label">1st place wins</div></div>
+            <div class="stat"><div class="num">10+</div><div class="label">Certifications</div></div>
+            <div class="stat"><div class="num">50+</div><div class="label">Students tutored</div></div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-image-wrapper">
+            <img src="assets/profile.jpg" alt="Titelo Maleka" class="hero-image">
+          </div>
+        </div>
+
       </div>
     </div>
-    <div class="hero-right">
-      <div class="hero-image-wrapper">
-        <img src="assets/profile.jpg" alt="Titelo Maleka" class="hero-image">
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- ABOUT -->
   <section id="about">
@@ -1642,7 +1432,7 @@
               <td class="cert-name-cell">CyberSecureTech Hackathon</td>
               <td class="cert-issuer-cell">UNIVEN &amp; CSIR</td>
               <td>
-                <button class="cert-view-btn" onclick="openModal('assets/CyberSecureTech.jpg')">View</button>
+                <button class="cert-view-btn" onclick="openModal('assets/CyberSecureTechHackathon.jpg')">View</button>
               </td>
             </tr>
           </tbody>
@@ -1722,24 +1512,40 @@
 <footer>© 2026 Titelo Maleka</footer>
 
 <script>
-  // Open modal with certificate image
+  // ---------- THEME TOGGLE ----------
+  (function() {
+    var root = document.documentElement;
+    var toggle = document.getElementById('themeToggle');
+
+    var saved = localStorage.getItem('theme');
+    var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    var initial = saved || (prefersLight ? 'light' : 'dark');
+    root.setAttribute('data-theme', initial);
+
+    toggle.addEventListener('click', function() {
+      var current = root.getAttribute('data-theme');
+      var next = current === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  })();
+
+  // ---------- CERT MODAL ----------
   function openModal(imageSrc) {
-    const modal = document.getElementById('certModal');
-    const modalImage = document.getElementById('modalImage');
+    var modal = document.getElementById('certModal');
+    var modalImage = document.getElementById('modalImage');
     modalImage.src = imageSrc;
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent scrolling
+    document.body.style.overflow = 'hidden';
   }
 
-  // Close modal
   function closeModal(event) {
     if (event && event.target !== event.currentTarget) return;
-    const modal = document.getElementById('certModal');
+    var modal = document.getElementById('certModal');
     modal.classList.remove('active');
-    document.body.style.overflow = ''; // Restore scrolling
+    document.body.style.overflow = '';
   }
 
-  // Close modal with Escape key
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
       closeModal();
