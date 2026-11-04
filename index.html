@@ -167,33 +167,46 @@
   }
   .nav-cta:hover{ background:#0a6910; border-color:transparent; color:#ffffff; }
 
-  /* ---------- THEME TOGGLE ---------- */
-  .theme-toggle{
-    background:transparent;
-    border:1px solid var(--border);
-    color:var(--text-dim);
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:0;
-    transition:all .25s ease;
-    flex-shrink:0;
+  /* ---------- THEME TOGGLE (Sliding Switch) ---------- */
+  .theme-toggle {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
   }
-  .theme-toggle:hover{
-    border-color:var(--accent);
-    color:var(--accent);
-    transform:rotate(15deg);
+  .toggle-track {
+    display: flex;
+    align-items: center;
+    width: 44px;
+    height: 24px;
+    background: var(--border);
+    border-radius: 999px;
+    padding: 2px;
+    transition: background 0.3s ease;
+    position: relative;
   }
-  .theme-toggle svg{ width:18px; height:18px; }
-
-  .theme-toggle .icon-sun{ display:block; }
-  .theme-toggle .icon-moon{ display:none; }
-  [data-theme="light"] .theme-toggle .icon-sun{ display:none; }
-  [data-theme="light"] .theme-toggle .icon-moon{ display:block; }
+  .toggle-thumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: var(--surface);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    color: var(--accent);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  .toggle-thumb svg { width: 12px; height: 12px; }
+  .theme-toggle .icon-moon { display: none; }
+  .theme-toggle:hover .toggle-track { background: var(--text-faint); }
+  [data-theme="light"] .toggle-track { background: var(--accent); }
+  [data-theme="light"] .toggle-thumb { transform: translateX(20px); }
+  [data-theme="light"] .icon-sun { display: none; }
+  [data-theme="light"] .icon-moon { display: block; }
 
   /* ---------- HERO ---------- */
   .hero{
@@ -257,6 +270,7 @@
     display:block;
   }
 
+  /* ---------- BADGE ---------- */
   .badge{
     display:inline-flex;
     align-items:center;
@@ -920,8 +934,7 @@
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .nav-cta { font-size: 12px; padding: 6px 14px; }
-    .theme-toggle { width: 32px; height: 32px; }
-    .theme-toggle svg { width: 16px; height: 16px; }
+    .theme-toggle { transform: scale(0.85); }
     .hero { padding: 40px 16px 24px; }
     .hero-right { min-height: auto; }
     .hero-image-wrapper { max-width: 240px; }
@@ -1009,8 +1022,7 @@
     h2.section-heading { font-size: clamp(1.5rem, 5vw, 2rem); }
     .logo { font-size: 13px; }
     .nav-cta { font-size: 11px; padding: 5px 12px; }
-    .theme-toggle { width: 30px; height: 30px; }
-    .theme-toggle svg { width: 14px; height: 14px; }
+    .theme-toggle { transform: scale(0.8); }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -1032,13 +1044,12 @@
     </ul>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="4"/>
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-        </svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
+        <span class="toggle-track">
+          <span class="toggle-thumb">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </span>
+        </span>
       </button>
       <a href="#contact" class="nav-cta">Let's talk</a>
     </div>
@@ -1053,7 +1064,7 @@
       <div class="hero-grid">
 
         <div class="hero-left">
-          <div class="badge"><span class="dot"></span>Open to Work</div>
+          <div class="badge">Open to Work</div>
           <h1 class="headline">
             <span class="line">Hackathon Winner.</span>
             <span class="line">Problem Solver.</span>
@@ -1125,18 +1136,20 @@
           </div>
           <div class="project-desc">
             <ul>
-              <li>Developed a web application that analyses URLs to identify suspicious links and potential phishing attacks before users access them.</li>
-              <li>Implemented phishing detection logic to identify fake domains, typosquatting, IP-based URLs, and other common scam patterns.</li>
-              <li>Supports all 11 South African languages to improve accessibility and digital safety.</li>
-              <li>Responsive and user-friendly interface, enabling users to perform real-time URL safety checks directly in their browser.</li>
+              <li>Built a full-stack cybersecurity platform that analyzes URLs, messages, and emails to detect phishing attacks before users access them.</li>
+              <li>Integrated Google Safe Browsing API and heuristic NLP to detect fake domains, typosquatting, job scams, family impersonation patterns, PII harvesting, and urgency tactics.</li>
+              <li>Developed a community scam reporting system with real-time confidence scoring and verification, backed by a Spring Boot REST API and MySQL database.</li>
+              <li>Supports all 11 official South African languages with a fully responsive UI for mobile and desktop.</li>
             </ul>
           </div>
           <div class="project-tags">
-            <span class="tag">React</span>
-            <span class="tag">TypeScript</span>
-            <span class="tag">Tailwind CSS</span>
+            <span class="tag">Flutter</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Google Safe Browsing</span>
+            <span class="tag">BLoC</span>
           </div>
-          <a href="https://msanzi-shield-url-checker.vercel.app/" class="project-cta">Live view →</a>
+          <a href="https://mzansishield.vercel.app/" class="project-cta">Live view →</a>
         </div>
 
         <div class="project-card">
@@ -1320,6 +1333,7 @@
           <div class="skill-list">
             <span class="skill-chip">Java</span>
             <span class="skill-chip">SQL</span>
+            <span class="skill-chip">Dart</span>
             <span class="skill-chip">TypeScript</span>
             <span class="skill-chip">JavaScript</span>
             <span class="skill-chip">HTML/CSS</span>
@@ -1329,6 +1343,8 @@
         <div class="skill-folder">
           <h3>Frameworks</h3>
           <div class="skill-list">
+            <span class="skill-chip">Flutter</span>
+            <span class="skill-chip">Spring Boot</span>
             <span class="skill-chip">React</span>
             <span class="skill-chip">React Native</span>
             <span class="skill-chip">Tailwind CSS</span>
@@ -1340,6 +1356,7 @@
           <h3>Tools</h3>
           <div class="skill-list">
             <span class="skill-chip">Git / GitHub</span>
+            <span class="skill-chip">MySQL</span>
             <span class="skill-chip">Oracle SQL</span>
             <span class="skill-chip">Supabase</span>
             <span class="skill-chip">VS Code</span>
